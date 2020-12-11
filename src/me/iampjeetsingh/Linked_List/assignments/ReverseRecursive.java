@@ -1,22 +1,22 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class PrintIthNode {
+public class ReverseRecursive {
     public static class Solution {
-        public static void printIthNode(LinkedListNode<Integer> head, int i){
-            while (i!=0 && head!=null){
-                head = head.next;
-                i--;
-            }
-            if(head!=null)
-                System.out.println(head.data);
+        public static LinkedListNode<Integer> reverseLinkedListRec(LinkedListNode<Integer> head) {
+            if(head==null || head.next==null)
+                return head;
+            LinkedListNode<Integer> revHead = reverseLinkedListRec(head.next);
+            head.next.next = head;
+            head.next = null;
+            return revHead;
         }
     }
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public static LinkedListNode<Integer> takeInput() throws IOException {
         LinkedListNode<Integer> head = null, tail = null;
 
@@ -40,24 +40,28 @@ public class PrintIthNode {
         return head;
     }
 
-    public static void print(LinkedListNode<Integer> head){
-        while(head != null){
+    public static void print(LinkedListNode<Integer> head) {
+        while(head != null) {
             System.out.print(head.data + " ");
             head = head.next;
         }
+
         System.out.println();
     }
 
     public static void main(String[] args) throws NumberFormatException, IOException {
+
         int t = Integer.parseInt(br.readLine().trim());
 
         while (t > 0) {
 
             LinkedListNode<Integer> head = takeInput();
-            int i = Integer.parseInt(br.readLine().trim());
-            Solution.printIthNode(head, i);
+
+            LinkedListNode<Integer> newHead = Solution.reverseLinkedListRec(head);
+            print(newHead);
 
             t -= 1;
         }
+
     }
 }

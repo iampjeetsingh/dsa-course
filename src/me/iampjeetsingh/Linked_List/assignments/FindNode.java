@@ -1,36 +1,29 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Palindrome {
+public class FindNode {
+
     public static class Solution {
-        public static boolean areEqual(LinkedListNode<Integer> head1, LinkedListNode<Integer> head2){
-            boolean result = true;
-            while (head1!=null && head2!=null){
-                if(!head1.data.equals(head2.data)){
-                    result = false;
-                    break;
-                }
-                head1 = head1.next;
-                head2 = head2.next;
+
+        public static int findNode(LinkedListNode<Integer> head, int n) {
+            if(head==null)
+                return -1;
+            int count = 0;
+            while (head!=null && head.data!=n){
+                count++;
+                head = head.next;
             }
-            return result && head1 == null && head2 == null;
-        }
-        public static boolean isPalindrome(LinkedListNode<Integer> head) {
-            LinkedListNode<Integer> temp = head, revHead = null;
-            while (temp!=null){
-                LinkedListNode<Integer> node = new LinkedListNode<>(temp.data);
-                node.next = revHead;
-                revHead = node;
-                temp = temp.next;
-            }
-            return areEqual(revHead, head);
+            if(head!=null)
+                return count;
+            return -1;
         }
     }
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
     public static LinkedListNode<Integer> takeInput() throws IOException {
         LinkedListNode<Integer> head = null, tail = null;
 
@@ -48,13 +41,14 @@ public class Palindrome {
                 tail.next = newNode;
                 tail = newNode;
             }
+
             i += 1;
         }
 
         return head;
     }
 
-    public static void print(LinkedListNode<Integer> head){
+    public static void print(LinkedListNode<Integer> head) {
         while(head != null) {
             System.out.print(head.data + " ");
             head = head.next;
@@ -69,12 +63,11 @@ public class Palindrome {
         while (t > 0) {
 
             LinkedListNode<Integer> head = takeInput();
+            int n = Integer.parseInt(br.readLine().trim());
 
-            boolean ans = Solution.isPalindrome(head);
-            System.out.println(ans);
+            System.out.println(Solution.findNode(head, n));
 
             t -= 1;
-
         }
 
     }

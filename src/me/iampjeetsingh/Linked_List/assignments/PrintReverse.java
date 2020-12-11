@@ -1,18 +1,18 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class FindLength {
+public class PrintReverse {
     public static class Solution {
-        public static int length(LinkedListNode<Integer> head){
-            int length = 0;
-            while (head!=null){
-                length++;
-                head = head.next;
+        public static void printReverse(LinkedListNode<Integer> root) {
+            StringBuilder output = new StringBuilder();
+            while (root!=null){
+                output.insert(0, root.data + " ");
+                root = root.next;
             }
-            return length;
+            System.out.println(output.toString());
         }
     }
 
@@ -42,10 +42,11 @@ public class FindLength {
     }
 
     public static void print(LinkedListNode<Integer> head){
-        while(head != null){
+        while(head != null) {
             System.out.print(head.data + " ");
             head = head.next;
         }
+
         System.out.println();
     }
 
@@ -55,10 +56,12 @@ public class FindLength {
         while (t > 0) {
 
             LinkedListNode<Integer> head = takeInput();
-            System.out.println(Solution.length(head));
+            Solution.printReverse(head);
             System.out.println();
 
             t -= 1;
+
         }
+
     }
 }

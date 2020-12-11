@@ -1,27 +1,18 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class DeleteNode {
-
+public class FindLength {
     public static class Solution {
-
-        public static LinkedListNode<Integer> deleteNode(LinkedListNode<Integer> head, int pos) {
-            if(head==null)
-                return null;
-            if(pos==0)
-                return head.next;
-            LinkedListNode<Integer> temp = head;
-            while (temp!=null && pos!=1){
-                pos--;
-                temp = temp.next;
+        public static int length(LinkedListNode<Integer> head){
+            int length = 0;
+            while (head!=null){
+                length++;
+                head = head.next;
             }
-            if(temp!=null && temp.next!=null){
-                temp.next = temp.next.next;
-            }
-            return head;
+            return length;
         }
     }
 
@@ -51,11 +42,10 @@ public class DeleteNode {
     }
 
     public static void print(LinkedListNode<Integer> head){
-        while(head != null) {
+        while(head != null){
             System.out.print(head.data + " ");
             head = head.next;
         }
-
         System.out.println();
     }
 
@@ -63,11 +53,10 @@ public class DeleteNode {
         int t = Integer.parseInt(br.readLine().trim());
 
         while (t > 0) {
-            LinkedListNode<Integer> head = takeInput();
 
-            int pos = Integer.parseInt(br.readLine().trim());
-            head = Solution.deleteNode(head, pos);
-            print(head);
+            LinkedListNode<Integer> head = takeInput();
+            System.out.println(Solution.length(head));
+            System.out.println();
 
             t -= 1;
         }

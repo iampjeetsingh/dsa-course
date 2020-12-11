@@ -1,4 +1,4 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 import java.util.ArrayList;
 

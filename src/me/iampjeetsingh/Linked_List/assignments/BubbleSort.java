@@ -1,24 +1,26 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class FindNode {
-
+public class BubbleSort {
     public static class Solution {
-
-        public static int findNode(LinkedListNode<Integer> head, int n) {
-            if(head==null)
-                return -1;
-            int count = 0;
-            while (head!=null && head.data!=n){
-                count++;
-                head = head.next;
+        public static LinkedListNode<Integer> bubbleSort(LinkedListNode<Integer> head) {
+            LinkedListNode<Integer> i = head, j;
+            while (i!=null){
+                j = i.next;
+                while (j!=null){
+                    if(i.data>j.data){
+                        int t = i.data;
+                        i.data = j.data;
+                        j.data = t;
+                    }
+                    j = j.next;
+                }
+                i = i.next;
             }
-            if(head!=null)
-                return count;
-            return -1;
+            return head;
         }
     }
 
@@ -41,14 +43,13 @@ public class FindNode {
                 tail.next = newNode;
                 tail = newNode;
             }
-
             i += 1;
         }
 
         return head;
     }
 
-    public static void print(LinkedListNode<Integer> head) {
+    public static void print(LinkedListNode<Integer> head){
         while(head != null) {
             System.out.print(head.data + " ");
             head = head.next;
@@ -58,17 +59,9 @@ public class FindNode {
     }
 
     public static void main(String[] args) throws NumberFormatException, IOException {
-        int t = Integer.parseInt(br.readLine().trim());
+        LinkedListNode<Integer> head = takeInput();
 
-        while (t > 0) {
-
-            LinkedListNode<Integer> head = takeInput();
-            int n = Integer.parseInt(br.readLine().trim());
-
-            System.out.println(Solution.findNode(head, n));
-
-            t -= 1;
-        }
-
+        head = Solution.bubbleSort(head);
+        print(head);
     }
 }

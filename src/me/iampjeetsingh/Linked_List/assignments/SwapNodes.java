@@ -1,18 +1,28 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class PrintReverse {
+public class SwapNodes {
     public static class Solution {
-        public static void printReverse(LinkedListNode<Integer> root) {
-            StringBuilder output = new StringBuilder();
-            while (root!=null){
-                output.insert(0, root.data + " ");
-                root = root.next;
+        public static LinkedListNode<Integer> swapNodes(LinkedListNode<Integer> head, int i, int j) {
+            LinkedListNode<Integer> temp = head, nodeI = null, nodeJ = null;
+            int index = 0;
+            while (temp!=null){
+                if(index==i)
+                    nodeI = temp;
+                if(index==j)
+                    nodeJ = temp;
+                index++;
+                temp = temp.next;
             }
-            System.out.println(output.toString());
+            if(nodeI!=null && nodeJ!=null){
+                int t = nodeI.data;
+                nodeI.data = nodeJ.data;
+                nodeJ.data = t;
+            }
+            return head;
         }
     }
 
@@ -51,16 +61,21 @@ public class PrintReverse {
     }
 
     public static void main(String[] args) throws NumberFormatException, IOException {
+
         int t = Integer.parseInt(br.readLine().trim());
 
         while (t > 0) {
 
             LinkedListNode<Integer> head = takeInput();
-            Solution.printReverse(head);
-            System.out.println();
+            String[] i_j = br.readLine().trim().split("\\s");
+
+            int i = Integer.parseInt(i_j[0]);
+            int j = Integer.parseInt(i_j[1]);
+
+            LinkedListNode<Integer> newHead = Solution.swapNodes(head, i, j);
+            print(newHead);
 
             t -= 1;
-
         }
 
     }

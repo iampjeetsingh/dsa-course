@@ -1,23 +1,31 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class EliminateDuplicates {
+public class AppendLastNToFirst {
     public static class Solution {
-
-        public static LinkedListNode<Integer> removeDuplicates(LinkedListNode<Integer> head) {
-            LinkedListNode<Integer> prev = head, temp = head;
+        public static LinkedListNode<Integer> appendLastNToFirst(LinkedListNode<Integer> head, int n) {
+            LinkedListNode<Integer> tail = null, temp = head;
+            int l = 0;
             while (temp!=null){
-                if(!prev.data.equals(temp.data)){
-                    prev.next = temp;
-                    prev = temp;
+                l++;
+                tail = temp;
+                temp = temp.next;
+            }
+            temp = head;
+            int count = 0;
+            while (temp!=null){
+                count++;
+                if(l-count==n){
+                    tail.next = head;
+                    head = temp.next;
+                    temp.next = null;
+                    break;
                 }
                 temp = temp.next;
             }
-            if(prev!=null)
-                prev.next = null;
             return head;
         }
 
@@ -30,7 +38,7 @@ public class EliminateDuplicates {
         String[] datas = br.readLine().trim().split("\\s");
 
         int i = 0;
-        while(i < datas.length && !datas[i].equals("-1")) {
+        while (i < datas.length && !datas[i].equals("-1")) {
             int data = Integer.parseInt(datas[i]);
             LinkedListNode<Integer> newNode = new LinkedListNode<Integer>(data);
             if(head == null) {
@@ -63,7 +71,8 @@ public class EliminateDuplicates {
 
             LinkedListNode<Integer> head = takeInput();
 
-            head = Solution.removeDuplicates(head);
+            int n = Integer.parseInt(br.readLine().trim());
+            head = Solution.appendLastNToFirst(head, n);
             print(head);
 
             t -= 1;

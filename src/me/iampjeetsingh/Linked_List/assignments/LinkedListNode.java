@@ -1,4 +1,4 @@
-package me.iampjeetsingh.Linked_List_1.assignments;
+package me.iampjeetsingh.Linked_List.assignments;
 
 public class LinkedListNode<T> {
     T data;
