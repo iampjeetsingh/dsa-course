@@ -5,6 +5,7 @@ import Binary_Trees.BinaryTreeNode;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class BinaryTreeUse {
     public static boolean searchBST(BinaryTreeNode<Integer> root, int k) {
@@ -69,6 +70,22 @@ public class BinaryTreeUse {
             return false;
         }
         return isBSTBest(root.left, root.data, min) && isBSTBest(root.right, max, root.data);
+    }
+
+    public static ArrayList<Integer> nodeToRootPath(BinaryTreeNode<Integer> root, int x){
+        if(root==null)
+            return null;
+        ArrayList<Integer> leftOut = nodeToRootPath(root.left, x);
+        if(leftOut!=null){
+            leftOut.add(root.data);
+            return leftOut;
+        }
+        ArrayList<Integer> rightOut = nodeToRootPath(root.right, x);
+        if(rightOut!=null){
+            rightOut.add(root.data);
+            return rightOut;
+        }
+        return null;
     }
 
     public static void main(String[] args) {
